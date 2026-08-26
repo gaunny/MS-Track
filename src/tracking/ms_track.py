@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-MS-Track: Multi-Streamline Tracking with DTD-guided modifiers.
+MS-Track: Multi-Scale Tracking with DTD-guided modifiers.
 
 This is the main tractography algorithm that integrates three types of
 microstructural information derived from Diffusion Tensor Distribution (DTD)

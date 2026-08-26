@@ -1,6 +1,6 @@
-# ASIDTD-Track: DTD-Guided Multi-Streamline Tractography
+# ASIDTD-Track: DTD-Guided Multi-Scale Tractography
 
-MS-Track (Multi-Streamline Tracking) is a tractography algorithm that integrates
+MS-Track (Multi-Scale Tracking) is a tractography algorithm that integrates
 microstructural information from Diffusion Tensor Distribution (DTD) inversion
 to guide streamline propagation. Three types of microstructural modifiers are used:
 
