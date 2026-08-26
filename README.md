@@ -5,7 +5,7 @@ microstructural information from Diffusion Tensor Distribution (DTD) inversion
 to guide streamline propagation. Three types of microstructural modifiers are used:
 
 1. **FA** (Fractional Anisotropy) - derived from LTE (Linear Tensor Encoding) signal
-2. **muFA** (microscopic fractional anisotropy) - microscopic diffusion anisotropy from DTD inversion
+2. **μFA** (microscopic fractional anisotropy) - microscopic diffusion anisotropy from DTD inversion
 3. **ASI** (Asymmetry Index) - from asymmetric fODF peak analysis
 
 > **Note:** The a-fODF (asymmetric fiber Orientation Distribution Function) and ASI
@@ -49,7 +49,7 @@ ASIDTD-Track/
 │   ├── fiber_classification/
 │   │   └── region_classification.py  # Voxel region classification (4 types)
 │   ├── tracking/
-│   │   ├── ms_track.py                # Main MS-Track tracker (FA+muFA+ASI)
+│   │   ├── ms_track.py                # Main MS-Track tracker (FA+μFA+ASI)
 │   │   ├── track_fibercup.py          # FiberCup-specific tracking variant
 │   │   ├── track_ismrm.py             # ISMRM per-bundle tracking
 │   │   └── baselines.py              # iFOD2 and SD_STREAM baselines
@@ -176,10 +176,10 @@ bash scripts/run_ismrm_pipeline.sh
 MS-Track supports independent toggling of each modifier:
 
 ```bash
-# FA + muFA + ASI (full model)
+# FA + μFA + ASI (full model)
 python -m src.tracking.ms_track --dataset fibercup --fa_mod --delta_mod --asi_mod
 
-# FA + muFA only
+# FA + μFA only
 python -m src.tracking.ms_track --dataset fibercup --fa_mod --delta_mod --no_asi_mod
 
 # FA only
