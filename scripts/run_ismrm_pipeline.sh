@@ -46,38 +46,26 @@ if [ ! -f "$FODF" ]; then
     exit 1
 fi
 
-# Step 1: Run MS-Track per-bundle tracking
-echo -e "\n[Step 1] Running MS-Track (muFA+ASI guided)..."
-python -m src.tracking.track_ismrm \
-    --fodf "$FODF" \
-    --delta "$DELTA_MAP" \
-    --peaks "$PEAKS" \
-    --asi "$ASI" \
-    --mask_dir "$BUNDLE_MASKS" \
-    --output_dir "${TRACKING_OUT}/ms_track_optimized" \
-    --use_asi --use_delta
+# Step 1: Run MS-Track (FA + muFA + ASI all on)
+echo -e "\n[Step 1] Running MS-Track (FA+muFA+ASI all on)..."
+python -m src.tracking.ms_track \
+    --dataset ismrm \
+    --fa_mod --delta_mod --asi_mod \
+    --output_dir "${TRACKING_OUT}/ms_track_optimized"
 
-# Step 2: Run MS-Track ablation (muFA only)
-echo -e "\n[Step 2] Running MS-Track (muFA only, no ASI)..."
-python -m src.tracking.track_ismrm \
-    --fodf "$FODF" \
-    --delta "$DELTA_MAP" \
-    --peaks "$PEAKS" \
-    --asi "$ASI" \
-    --mask_dir "$BUNDLE_MASKS" \
-    --output_dir "${TRACKING_OUT}/ms_track_delta_only" \
-    --use_delta --no_asi
+# Step 2: Run MS-Track ablation (muFA only, no ASI, no FA)
+echo -e "\n[Step 2] Running MS-Track (muFA only)..."
+python -m src.tracking.ms_track \
+    --dataset ismrm \
+    --delta_mod --no_fa_mod --no_asi_mod \
+    --output_dir "${TRACKING_OUT}/ms_track_delta_only"
 
-# Step 3: Run MS-Track ablation (no muFA, no ASI)
+# Step 3: Run MS-Track ablation (no modifiers)
 echo -e "\n[Step 3] Running MS-Track (no modifiers)..."
-python -m src.tracking.track_ismrm \
-    --fodf "$FODF" \
-    --delta "$DELTA_MAP" \
-    --peaks "$PEAKS" \
-    --asi "$ASI" \
-    --mask_dir "$BUNDLE_MASKS" \
-    --output_dir "${TRACKING_OUT}/ms_track_no_modifiers" \
-    --no_delta --no_asi
+python -m src.tracking.ms_track \
+    --dataset ismrm \
+    --no_fa_mod --no_delta_mod --no_asi_mod \
+    --output_dir "${TRACKING_OUT}/ms_track_no_modifiers"
 
 # Step 4: Run baselines
 echo -e "\n[Step 4] Running baseline methods..."

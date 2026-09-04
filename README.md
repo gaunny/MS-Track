@@ -49,9 +49,9 @@ ASIDTD-Track/
 │   ├── fiber_classification/
 │   │   └── region_classification.py  # Voxel region classification (4 types)
 │   ├── tracking/
-│   │   ├── ms_track.py                # Main MS-Track tracker (FA+μFA+ASI)
-│   │   ├── track_fibercup.py          # FiberCup-specific tracking variant
-│   │   ├── track_ismrm.py             # ISMRM per-bundle tracking
+│   │   ├── ms_track.py                # Unified MS-Track tracker (all datasets)
+│   │   ├── track_fibercup.py          # Deprecated: use ms_track.py --dataset fibercup
+│   │   ├── track_ismrm.py             # Deprecated: use ms_track.py --dataset ismrm
 │   │   └── baselines.py              # iFOD2 and SD_STREAM baselines
 │   ├── evaluation/
 │   │   ├── fibercup_gt_masks.py       # Generate FiberCup GT region masks
@@ -243,13 +243,8 @@ python -m src.preprocessing.compute_fa --data <merged.nii.gz> --output <fa.nii.g
 # MS-Track (main tracker)
 python -m src.tracking.ms_track --dataset fibercup --fa_mod --delta_mod --asi_mod
 
-# FiberCup variant
-python -m src.tracking.track_fibercup --dataset fibercup
-
-# ISMRM per-bundle tracking
-python -m src.tracking.track_ismrm --fodf <fodf.nii.gz> --delta <delta.nii.gz> \
-    --peaks <peaks.nii.gz> --asi <asi.nii.gz> --mask_dir <bundle_masks/> \
-    --output_dir <out/>
+# ISMRM 2015 tracking (unified)
+python -m src.tracking.ms_track --dataset ismrm --fa_mod --delta_mod --asi_mod
 
 # Baselines
 python -m src.tracking.baselines --dataset fibercup --method all

@@ -18,7 +18,6 @@ Note: Requires the ISMRM 2015 challenge scoring data and the
 import os
 import sys
 import argparse
-import glob
 import logging
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))

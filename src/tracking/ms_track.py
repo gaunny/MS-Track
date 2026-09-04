@@ -54,6 +54,8 @@ def parse_args():
     parser.add_argument("--no_asi_mod", action="store_false", dest="use_asi", default=False)
     parser.add_argument("--pmf", action="store_true", dest="use_pmf", default=False,
                         help="Use PMF instead of discrete peaks")
+    parser.add_argument("--output_dir", default=None,
+                        help="Override output directory (default: auto from out_root)")
     return parser.parse_args()
 
 
@@ -77,7 +79,10 @@ def run_tracking(args):
     PROBABILISTIC = TRACKING_PARAMS["probabilistic"]
     USE_GT_MASK = TRACKING_PARAMS["use_gt_mask"]
 
-    OUTPUT_DIR = os.path.join(cfg["out_root"], f"{USE_FA_MOD}_{USE_DELTA_MOD}_{USE_ASI_MOD}")
+    if args.output_dir:
+        OUTPUT_DIR = args.output_dir
+    else:
+        OUTPUT_DIR = os.path.join(cfg["out_root"], f"{USE_FA_MOD}_{USE_DELTA_MOD}_{USE_ASI_MOD}")
     ensure_output_dir(OUTPUT_DIR)
     out_tck = os.path.join(OUTPUT_DIR, f"{file_name}.tck")
 
@@ -227,12 +232,6 @@ def run_tracking(args):
             # prototype dominates; otherwise the voxel is a transition voxel and
             # the 20 deg turning limit below keeps the streamline from sharp turns.
             if main_region == 2 and (asi_val >= 0.7 or max_weight > 0.6):
-                break
-
-            # Termination when FA or muFA falls below 0.05
-            fa_val = float(fa_map[i, j, k])
-            delta_val = float(delta_map[i, j, k])
-            if fa_val < 0.05 or delta_val < 0.05:
                 break
 
             # Generate candidate directions

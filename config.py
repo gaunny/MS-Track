@@ -139,10 +139,11 @@ TRACKING_PARAMS = {
     # Region-specific thresholds
     "region_sigma": 0.25,
     # Prototype feature vectors for region classification
-    "proto_parallel": [0.8, 0.3, 0.1],   # FA=0.80, muFA=0.30, ASI=0.10
-    "proto_cross":    [0.4, 0.6, 0.1],   # FA=0.40, muFA=0.60, ASI=0.10
-    "proto_terminal": [0.2, 0.1, 0.9],   # FA=0.20, muFA=0.10, ASI=0.90
-    "proto_bending":  [0.5, 0.3, 0.6],   # FA=0.50, muFA=0.30, ASI=0.60
+    # Calibrated on FiberCup synthetic DTD phantom (mean values)
+    "proto_parallel": [0.78, 0.93, 0.38],   # FA=0.78, muFA=0.93, ASI=0.38
+    "proto_cross":    [0.64, 0.93, 0.23],   # FA=0.64, muFA=0.93, ASI=0.23
+    "proto_terminal": [0.79, 0.95, 0.93],   # FA=0.79, muFA=0.95, ASI=0.93
+    "proto_bending":  [0.78, 0.93, 0.74],   # FA=0.78, muFA=0.93, ASI=0.74
 }
 
 # =========================================================
